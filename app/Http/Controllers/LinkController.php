@@ -39,7 +39,9 @@ class LinkController extends Controller
 
     		}
 
-    		return view('/')->withCodes($codes);
+    		$fk = url("/") . '/' . $codes ;
+
+    		return redirect('/')->with('status','All done! Here is your short URL:<a href="'. $fk .'">'. $fk .'</a>');
 
     	}
 
