@@ -21,7 +21,7 @@ class LinkController extends Controller
     	$exists = Url::where('url','=',$url);
 
     	if($exists->count() === 1){
-    		$code = $exists->first()->code;
+    		$codes = $exists->first()->code;
     	}else{
     		$link = new Url;
 
@@ -41,12 +41,22 @@ class LinkController extends Controller
 
     		$fk = url("/") . '/' . $codes ;
 
+    		if($codes){
     		return redirect('/')->with('status','All done! Here is your short URL:<a href="'. $fk .'">'. $fk .'</a>');
+    		}
 
+    		return redirect('/')->with('status','Something went wrong,try again');
     	}
 
 
     public function get($code){
 
+    	$link = Url::where('code','=',$code)->first();
+
+    	if($link->count() === 1){
+    		return redirect($link->url);
+    	}else{
+    		return redirect('/');
+    	}
     }
 }
