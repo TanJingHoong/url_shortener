@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/make',array('as' => 'make' , 'uses' => 'LinkController@make'));
+
+Route::get('/{code}',array('as' => 'get' , 'uses' => 'LinkController@get'));

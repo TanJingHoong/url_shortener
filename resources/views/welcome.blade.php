@@ -20,7 +20,23 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h1>Shorten a Url</h1>
-                    {{ Form::open() }}
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        </div>
+                    @endif
+
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {!! session('status') !!}
+                        </div>
+                    @endif
+
+                    {{ Form::open(array('url' => 'make')) }}
 
                     {{ Form::url('url', 'Enter a url', ['class' => 'form-control url']) }}
 
